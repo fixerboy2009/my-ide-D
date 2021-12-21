@@ -5,6 +5,7 @@ import sys
 import os
 import http.client
 import json
+import requests
 # Imports in comments are either bugged or non-working
 from colorama import Fore, Back, Style
 from playsound import playsound
@@ -18,10 +19,33 @@ def playSound(soundFile):
 def resetFore():
     Fore.WHITE
 
+def pastebinRaw(pid):
+    url = "https://pastebin.com/raw/" + pid + "/"
+    responce = requests.get(url)
+    return responce.text
+
+def downloadImage(imgurl, name):
+    print("Downloading image.")
+    r = requests.get(imgurl)
+    with open(name + ".png", 'wb') as f:
+        f.write(r.content)
+        print("Downloaded image! Path: fs/" + name + ".png")
+
+def downloadSource(url, name):
+    fullName = name + ".txt"
+    print("Downloading URL Source......")
+    r = requests.get(url)
+    with open(fullName, 'w', encoding="utf-8") as f:
+        f.write(str(r.text))
+        print("Downloaded!")
+
+def getNetworkInfo():
+    response = requests.get("https://httpbin.org/ip")
+    return "{0}".format(response.json()['origin'])
 
 # How to make more?
 # Format: "varname": value
-varsToPass = {"wait": time.sleep, "os": os, "time": time, "httpclient": http.client, "sys": sys, "CF": Fore, "CB": Back, "CS": Style, "reset": resetAll, "playSound": playSound}
+varsToPass = {"wait": time.sleep, "os": os, "time": time, "httpclient": http.client, "sys": sys, "CF": Fore, "CB": Back, "CS": Style, "reset": resetAll, "playSound": playSound, 'networkInfo': getNetworkInfo, "pastebin": pastebinRaw, "imgdown": downloadImage, "srcdown": downloadSource}
 
 os.chdir("C:/Users/fixer/Downloads/new thing/FIDE/fs")
 first = True

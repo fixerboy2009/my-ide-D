@@ -4,6 +4,7 @@ import time
 import sys
 import os
 import http.client
+import json
 # Imports in comments are either bugged or non-working
 from colorama import Fore, Back, Style
 from playsound import playsound
@@ -14,6 +15,10 @@ def resetAll():
 def playSound(soundFile):
     playsound(soundFile)
 
+def resetFore():
+    Fore.WHITE
+
+
 # How to make more?
 # Format: "varname": value
 varsToPass = {"wait": time.sleep, "os": os, "time": time, "httpclient": http.client, "sys": sys, "CF": Fore, "CB": Back, "CS": Style, "reset": resetAll, "playSound": playSound}
@@ -21,9 +26,13 @@ varsToPass = {"wait": time.sleep, "os": os, "time": time, "httpclient": http.cli
 os.chdir("C:/Users/fixer/Downloads/new thing/FIDE/fs")
 first = True
 latestScript = 0
-mode = open("C:/Users/fixer/Downloads/new thing/FIDE/defaults/dm", 'r').read()
+mode = open("C:/Users/fixer/Downloads/new thing/FIDE/defaults/lastmode", 'r').read()
 wmsg = open("C:/Users/fixer/Downloads/new thing/FIDE/defaults/welcomemsg", 'r').read()
 ver = "F-IDE V1-PY"
+
+# autorun handler
+autorunData = open("C:/Users/fixer/Downloads/new thing/FIDE/defaults/autoexec", 'r').read()
+exec(autorunData)
 
 def setDefault(default):
     file = open("C:/Users/fixer/Downloads/new thing/FIDE/defaults/dm", 'w')
@@ -48,6 +57,9 @@ def info():
 
 def changeMode(nmode):
     mode = nmode
+    file = open("C:/Users/fixer/Downloads/new thing/FIDE/defaults/lastmode", "w")
+    file.truncate()
+    file.write(nmode)
 
 def otherLang(scr, lang):
     if lang == "lua":
@@ -90,6 +102,7 @@ def runScript(scr):
     print("Executing script.....")
     wait(2)
     exec(scr, varsToPass)
+    open("C:/Users/fixer/Downloads/new thing/FIDE/defaults/scriptsExecuted", 'w').write(scr + "\n")
     print("Executed!")
 
 def init():
@@ -99,38 +112,54 @@ def init():
     if "mode" in typed:
         if typed == "mode lua":
             mode = "lua"
+            changeMode("lua")
             print("Changed mode to lua")
 
         if typed == "mode python":
             mode = "python"
-            print( Fore.GREEN +  "Changed mode to python" + Style.RESET_ALL)
+            changeMode("python")
+            print( Fore.GREEN +  "Changed mode to python")
+            resetFore()
 
         if typed == "mode py":
             mode = "python"
-            print( Fore.GREEN + "Changed mode to python" + Style.RESET_ALL)
+            changeMode("python")
+            print( Fore.GREEN + "Changed mode to python")
+            resetFore()
 
         if typed == "mode cs":
             mode = "c#"
-            print( Fore.GREEN + "Changed mode to C#" + Style.RESET_ALL)
+            changeMode("c#")
+            print( Fore.GREEN + "Changed mode to C#")
+            resetFore()
 
         if typed == "mode c#":
             mode = "c#"
-            print( Fore.GREEN + "Changed mode to c#" + Style.RESET_ALL)
+            changeMode("c#")
+            print( Fore.GREEN + "Changed mode to c#")
+            resetFore()
 
         if typed == "mode web":
-            print( Fore.RED + "Can't change mode to HTTP, HTTP is currently disabled due to bugs in the code. Sorry!" + Style.RESET_ALL)
+            print( Fore.RED + "Can't change mode to HTTP, HTTP is currently disabled due to bugs in the code. Sorry!")
+            resetFore()
 
         if typed == "mode file":
             mode = "file"
-            print( Fore.GREEN + "Changed mode to file" + Style.RESET_ALL)
+            changeMode("file")
+            print( Fore.GREEN + "Changed mode to file")
+            resetFore()
 
         if typed == "mode batch":
             mode = "batch"
-            print( Fore.GREEN + "Changed mode to batch" + Style.RESET_ALL)
+            changeMode("batch")
+            print( Fore.GREEN + "Changed mode to batch")
+            resetFore()
 
         if typed == "mode audio-preset":
             mode = "audio-preset"
-            print( Fore.GREEN + "Changed mode to audio-preset, presets: bad apple" + Style.RESET_ALL)
+            changeMode("audio-preset")
+            print( Fore.GREEN + "Changed mode to audio-preset, presets: bad apple")
+            resetFore()
     else:
         if typed == "info":
             info()

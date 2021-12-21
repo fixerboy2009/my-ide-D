@@ -5,10 +5,34 @@ import sys
 import os
 import http.client
 import json
+import colorama
 import requests
 # Imports in comments are either bugged or non-working
 from colorama import Fore, Back, Style
 from playsound import playsound
+
+os.system("cls")
+
+deps = {
+    "conf": {
+        "Theme": {
+        "Foreground": colorama.Fore.WHITE,
+        "Background": colorama.Back.BLACK,
+        "ErrorColor": colorama.Fore.RED,
+        "SuccessColor": colorama.Fore.GREEN,
+    },
+    "AutoExec": "print('autoexectest')",
+    "IsDevelopmentVersion": True,
+    "TempPath": "C:/Users/fixer/Downloads/new thing/FIDE/fs/tmp/",
+    }
+}
+
+isDevEnv = deps["conf"]["IsDevelopmentVersion"]
+
+if isDevEnv == True:
+    print(Fore.YELLOW + "WARNING: Current version is in the development stage, you may come accross bugs on the way." + Fore.RESET)
+
+print(Fore.CYAN + "Merry Christmas! Be Good!" + Fore.RESET)
 
 def resetAll():
     print(Style.RESET_ALL)
@@ -72,8 +96,6 @@ if firstNew == True:
 
 def execute(cmd):
     os.system(cmd)
-
-execute("cls")
 
 def info():
     print("INFO: ")

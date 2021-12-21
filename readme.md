@@ -31,3 +31,7 @@ As of right now, there are no varibles passed wile executing python code.
 
 ## How to run
 Just run the python file in the command line!
+
+## Future Updates
+1. Adding colored text
+2. Fixing audio-preset mode

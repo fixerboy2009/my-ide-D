@@ -30,3 +30,4 @@ If your getting a error from the filesystem, check the file paths in the script 
 As of right now, there are no varibles passed wile executing python code.
 
 ## How to run
+Just run the python file in the command line!

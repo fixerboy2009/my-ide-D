@@ -1,17 +1,24 @@
 # F-IDE V1-PY
-#!/usr/bin/python3
 import http
 import time
 import sys
 import os
 import http.client
 # Imports in comments are either bugged or non-working
-# import colorama
-# import playsound
+from colorama import Fore, Back, Style
+from playsound import playsound
 
-varsToPass = {"wait": time.sleep}
+def resetAll():
+    print(Style.RESET_ALL)
 
-os.chdir("C:/Users/fixer/Downloads/new thing/FIDE/defaults")
+def playSound(soundFile):
+    playsound(soundFile)
+
+# How to make more?
+# Format: "varname": value
+varsToPass = {"wait": time.sleep, "os": os, "time": time, "httpclient": http.client, "sys": sys, "CF": Fore, "CB": Back, "CS": Style, "reset": resetAll, "playSound": playSound}
+
+os.chdir("C:/Users/fixer/Downloads/new thing/FIDE/fs")
 first = True
 latestScript = 0
 mode = open("C:/Users/fixer/Downloads/new thing/FIDE/defaults/dm", 'r').read()
@@ -96,34 +103,34 @@ def init():
 
         if typed == "mode python":
             mode = "python"
-            print("Changed mode to python")
+            print( Fore.GREEN +  "Changed mode to python" + Style.RESET_ALL)
 
         if typed == "mode py":
             mode = "python"
-            print("Changed mode to python")
+            print( Fore.GREEN + "Changed mode to python" + Style.RESET_ALL)
 
         if typed == "mode cs":
             mode = "c#"
-            print("Changed mode to C#")
+            print( Fore.GREEN + "Changed mode to C#" + Style.RESET_ALL)
 
         if typed == "mode c#":
             mode = "c#"
-            print("Changed mode to c#")
+            print( Fore.GREEN + "Changed mode to c#" + Style.RESET_ALL)
 
         if typed == "mode web":
-            print("Can't change mode to HTTP, HTTP is currently disabled due to bugs in the code. Sorry!")
+            print( Fore.RED + "Can't change mode to HTTP, HTTP is currently disabled due to bugs in the code. Sorry!" + Style.RESET_ALL)
 
         if typed == "mode file":
             mode = "file"
-            print("Changed mode to file")
+            print( Fore.GREEN + "Changed mode to file" + Style.RESET_ALL)
 
         if typed == "mode batch":
             mode = "batch"
-            print("Changed mode to batch")
+            print( Fore.GREEN + "Changed mode to batch" + Style.RESET_ALL)
 
         if typed == "mode audio-preset":
             mode = "audio-preset"
-            print("Changed mode to audio-preset, presets: bad apple")
+            print( Fore.GREEN + "Changed mode to audio-preset, presets: bad apple" + Style.RESET_ALL)
     else:
         if typed == "info":
             info()

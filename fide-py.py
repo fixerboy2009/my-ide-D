@@ -9,6 +9,8 @@ import http.client
 # import colorama
 # import playsound
 
+varsToPass = {"wait": time.sleep}
+
 os.chdir("C:/Users/fixer/Downloads/new thing/FIDE/defaults")
 first = True
 latestScript = 0
@@ -80,7 +82,7 @@ def runScript(scr):
         stop()
     print("Executing script.....")
     wait(2)
-    exec(scr)
+    exec(scr, varsToPass)
     print("Executed!")
 
 def init():

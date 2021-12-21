@@ -27,7 +27,8 @@ If your getting a error from the filesystem, check the file paths in the script 
 4. A: The Lua mode is current bugged, as I am still figuring out how to execute files with the .lua extension inside of python.
 
 ## Varibles in executing code
-As of right now, there are no varibles passed wile executing python code.
+1. wait(float sec)
+   * Pauses the script for the time specified
 
 ## How to run
 Just run the python file in the command line!
